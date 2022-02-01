@@ -1,61 +1,181 @@
+The general problem to be solved with this program is that the code from Assignment Two was not user friendly as it involved taking command line input for the entire user interface. This isn't ideal as the average user will not know how to intuitively use that program. To solve that issue, I've developed a complete graphical user interface (or GUI) for the purpose of promoting an intuitive user experience, where anyone who hasn't used the program before can fairly quickly pick it up.
 
-README FILE
+One of the limitations of my code is that it still must be accessed using a command line in Java to run it. One thing I could do is generate an executable using my java files so that this program can reliably be run on any Windows computer, without having to work with a command line to run the program.
 
-GENERAL PROBLEM - Create a GUI Portfolio which allows user to buy, sell , search , update and calculate gains amongst two types
-                  of investments Stock and Mutual Fund in GUI. Also I used an array list to manage both the invetsments.
-                  The program was further managed by using one parental class i.e. Investment which is further 
-                  extended by two classes i.e. Stock and Mutual Fund.Also, add exception handling so 
-                  that the system will be more robust and user-friendly.
- 
-ASSUMPTIONS    -  Manually giving the prices and values for all required investments.
-                  All basic assumptions requiered for the assignment.
-                  Considering gains from completely sold stocks and current stock.    
+A user can compile my program using the line "javac *.java" when inside the directory. They can then run the program, after going one directory up, by entering "java.ePortfolio.Portfolio fileName.txt" into the command line on a system with Java installed. "fileName.txt" represents a file with stored data from another session. They can then use any of the given menu options, beginning with "buy." From there, they can update the price, sell a stock/fund, calculate their gain on paper, search for a given stock/fund based on symbol, keyword, or price range.
 
-LIMITATIONS -    The search functionality works perfectly for all individual enteries but not for multiple enteries except price range and symbol.
-                 Otherwise, None beacuse I met all the conditions as per the requirment of the program
-                 for the assignment.        
+The program is tested for correctness using the given Test Plan:
 
-1) The general problem I was trying to solve was specifically that I encountered while doing the code was 
-   that there was a lot of redudancy of code so for that a solution I have desribed in the follwing point 2.
-  
-2)  The problem of reusing the code again and again or the redudancy of code was solved using an extend statement 
-   followed by an @override command to avoid duplicacy of code and unneccesary wastage of time. 
+Test Case 1:
 
-3) The user can build and test my programm through the following commands :
-   1) javac eportfolio/*.java ( For Compiling)
-   2) java eportfolio.EPortfolioGUI (To Run)
+Functionality: Buy
+Input: Type of investment is not a stock or fund
+Output: "Please input either stock or mutual fund" and is reprompted to enter type of investment
+Test Case 2:
 
-4) TEST PLAN 
-   My program can be tested by entering any of the inputs including the ones given by
-   the professor in the assignment which have been already tested by me.
+Functionality: Buy
+Input: Entered stock/fund symbol is already in the system
+Output: User is not prompted for name, only quantity and price
+Test Case 3:
 
-   For example, if we initially buy 500 shares of AAPL stock at the price of $110.08 per share, the quantity will be 500, 
-   and the bookValue will be 500 × 110.08 + 9.99 = $55,049.99. Later on, if the price is changed to $142.23 per share, 
-   the gain will be (500 × 142.23 – 9.99) – 55,049.99 = 71,105.01 – 55,049.99 = $16,055.02. 
-   Alternatively, if we sell 200 shares of this stock at $142.23 per share, the payment received will be 200 × 142.23 – 9.99 = $28,436.01, 
-   the quantity will be reduced to 300, and bookValue will be adjusted to 55,049.99 × 300/500 = $33,029.99.
+Functionality: Buy
+Input: Entered stock/fund symbol is not already in the system
+Output: User is prompted for name, quantity and price
+Test Case 4:
 
-   For each mutual fund, we do not pay any fee if we buy certain units of the fund, but if we sell certain units of the fund, 
-   we need to pay a redemption fee of $45. For instance, if we initially buy 450 units of SSETX at $53.26 per unit, 
-   the quantity will be 450 and the bookValue will be 450 × 53.26 = $23,967.00. Later on, if the price goes down to $42.21 per unit, 
-   the gain will be (450 × 42.21 – 45.00) – 23,967.00 = 18,949.50 – 23,967.00 = –$5,017.50. 
-   Alternatively, if we sell 150 units of this fund at $42.21 per unit, the payment received will be 150 × 42.21 – 45.00 =
-   $6,286.50, the quantity will be reduced to 300, and the bookValue will be changed to 23,967.00×300/450 = $15,978.00.
-   
-   For search,a search request may just contain a symbol (e.g., AAPL) and in this case, only the investment with this symbol will be returned. 
-   If a search request contains the keywords “Growth Fund”, then all investments whose names contain these keywords will be retured. 
-   If a search request contains more fields, e.g., “AAPL” as the symbol and “10.00-100.00” as the price range, 
-   then simply matching the symbol AAPL is not enough; the price of the investment should also fall within the given price range.
-   
-   Also ran search cases for the 4 major conditions i.e. the given element is not on the list, the given element is at the start of the
-   list, the given element is at the end of the list and lastly the given element is somewhere between the two ends in the list.
-   The searched aligned up showed the working of Hash Maps and searching them respectively.   
+Functionality: Sell
+Input: Entered a stock/fund symbol not in the system
+Output: "Please enter a valid symbol" and is reprompted for a valid symbol
+Test Case 5:
 
-5) Possible improvements
-   I would have loved to work more on the search function for price range and try more sets of possible combination for self-satisfaction.
-   Could have presented a more professional style of coding.
+Functionality: Sell
+Input: Entered a stock/fund symbol in the system
+Output: User is prompted for quantity and price
+Test Case 6:
 
+Functionality: Sell
+Input: Quantity entered is greater than quantity available to sell
+Output: "Please enter a quantity no greater than X" with X representing the available quantity and is reprompted for quantity
+Test Case 7:
 
+Functionality: Sell
+Input: Quantity entered is greater than quantity available to sell
+Output: "Please enter a quantity no greater than X" with X representing the available quantity and is reprompted for quantity
+Test Case 8:
 
+Functionality: Sell
+Input: All fields for symbol, keyword, and range are left empty
+Output: Return all stocks and funds
+Test Case 9:
 
+Functionality: Sell
+Input: Symbol matching a stock/fund is entered and other fields are left blank
+Output: Return matching stock/fund
+Test Case 10:
 
+Functionality: Sell
+Input: Keywords matching the name of a stock/fund are inputted
+Output: All stocks/funds with all matching keywords are outputted, regardless of order or case sensitivity
+Test Case 11:
+
+Functionality: Sell
+Input: A single number for price range is inputted
+Output: Any stock/fund with price matching that value are returned
+Test Case 12:
+
+Functionality: Sell
+Input: A range of form "X-Y" with X being lower bounds and Y being upper bounds of price are entered
+Output: All stocks/funds within that price range are outputted
+Test Case 12:
+
+Functionality: Sell
+Input: A range of form "X-" with X being lower bounds is entered
+Output: All stocks/funds with at least X price are returned
+Test Case 13:
+
+Functionality: Sell
+Input: A range of form "-X" with X being lower bounds is entered
+Output: All stocks/funds with at most X price are returned
+Test Case 14:
+
+Functionality: Command Loop
+Input: An input not matching any of the functions is entered
+Output: "Please enter one of the options [1,6]"
+Test Case 15:
+
+Functionality: File Loading, filename "investments.txt"
+
+Input:
+
+  type = "stock"
+  symbol = "YEET"
+  name = "Yeet Inc."
+  quantity = "10"
+  price = "25.0"
+  bookValue = "259.99"
+
+  type = "stock"
+  symbol = "AAPL"
+  name = "Apple Inc."
+  quantity = "500"
+  price = "142.23"
+  bookValue = "55049.99"
+Function: Entered all data successfully
+
+Test Case 16:
+
+Functionality: File Outputting, filename "investments.txt"
+
+Input: Through buy,
+
+  type = "stock"
+  symbol = "YEAX"
+  name = "Yeaxamellon Inc."
+  quantity = "10"
+  price = "25.0"
+  bookValue = "259.99"
+
+  type = "stock"
+  symbol = "AAPL"
+  name = "Apple Inc."
+  quantity = "500"
+  price = "142.23"
+  bookValue = "55049.99"
+
+  type = "mutualfund"
+  symbol = "DELL"
+  name = "Dell Inc."
+  quantity = "99"
+  price = "250"
+  bookValue = "55049.99"
+Function: Returned file output (should be identical):
+
+  type = "stock"
+  symbol = "YEAX"
+  name = "Yeaxamellon Inc."
+  quantity = "10"
+  price = "25.0"
+  bookValue = "259.99"
+
+  type = "stock"
+  symbol = "AAPL"
+  name = "Apple Inc."
+  quantity = "500"
+  price = "142.23"
+  bookValue = "55049.99"
+
+  type = "mutualfund"
+  symbol = "DELL"
+  name = "Dell Inc."
+  quantity = "99"
+  price = "250"
+  bookValue = "55049.99"
+Test Case 17:
+
+Functionality: Buy page, reset button
+Input: Button is pressed
+Output: All fields are cleared, with type changed to default of Stock
+Test Case 18:
+
+Functionality: Sell page, reset button
+Input: Button is pressed
+Output: All fields are cleared
+Test Case 19:
+
+Functionality: Update page, next button
+Input: Button is pressed
+Output: Button is disabled when there's only one entry in total or there's no entries remaining to go forward
+Test Case 20:
+
+Functionality: Update page, prev button
+Input: Button is pressed
+Output: Button is disabled when there's only one entry in total or there's no entries remaining to go back
+Test Case 21:
+
+Functionality: Search page, reset button
+Input: Button is pressed
+Output: All fields are cleared
+If I had extra time available, I would:
+Program a function to change the commision values
+Create functionality to change a stock or fund name after it was created
+Generate an executable to be distributed
