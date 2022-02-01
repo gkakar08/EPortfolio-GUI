@@ -179,3 +179,4 @@ If I had extra time available, I would:
 Program a function to change the commision values
 Create functionality to change a stock or fund name after it was created
 Generate an executable to be distributed
+
